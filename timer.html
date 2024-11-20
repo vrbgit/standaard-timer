@@ -22,7 +22,7 @@
             color: white;
             margin-bottom: 15px;
             text-align: center;
-            font-size: 1.5em; /* Kleiner gemaakt om ruimte te besparen */
+            font-size: 1.5em;
         }
 
         #countdown {
@@ -30,32 +30,31 @@
             justify-content: space-around;
             text-align: center;
             background-color: #333;
-            padding: 10px; /* Verminderd om ruimte te besparen */
+            padding: 10px;
             border-radius: 10px;
             color: white;
-            max-width: 400px; /* Max breedte ingesteld */
-            max-height: 200px; /* Max hoogte ingesteld */
+            max-width: 400px;
             width: 100%;
         }
 
         .time-box {
-            margin: 0 10px; /* Marges verkleind */
+            margin: 0 10px;
         }
 
         .time-box span {
             display: block;
-            font-size: 1.5em; /* Kleiner font om binnen de container te passen */
+            font-size: 1.5em;
         }
 
         .label {
-            font-size: 0.9em; /* Iets kleiner voor meer compactheid */
+            font-size: 0.9em;
             color: #ccc;
         }
     </style>
 </head>
 <body>
 
-    <h1 id="title">VRBorrel</h1>
+    <h1 id="title">Aftellen tot evenement</h1>
 
     <div id="countdown">
         <div class="time-box">
@@ -87,10 +86,9 @@
         ];
         let currentEventIndex = 0;
 
-        // Startdatum instellen
-        let countdownDate = new Date("Nov 14, 2024 16:30:00").getTime();
+        // Startdatum instellen (voorbeeld: 14 november 2024, 16:30 lokale tijd)
+        let countdownDate = new Date("2024-11-14T16:30:00").getTime();
 
-        // Update functie voor de countdown
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = countdownDate - now;
@@ -108,12 +106,12 @@
                 document.getElementById("minutes").innerHTML = minutes;
                 document.getElementById("seconds").innerHTML = seconds;
             } else {
-                // Event verlopen - volgende evenement starten
+                // Tijd is verlopen - start volgende evenement
                 currentEventIndex = (currentEventIndex + 1) % eventCycle.length;
                 const nextEvent = eventCycle[currentEventIndex];
 
-                // Voeg de dagen toe aan de huidige datum
-                countdownDate = new Date().getTime() + nextEvent.days * 24 * 60 * 60 * 1000;
+                // Voeg dagen toe aan de huidige eindtijd
+                countdownDate += nextEvent.days * 24 * 60 * 60 * 1000;
 
                 // Update de titel
                 document.getElementById("title").innerHTML = `Aftellen tot ${nextEvent.title}`;
