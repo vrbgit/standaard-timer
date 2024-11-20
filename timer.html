@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aftellen tot evenement</title>
+    <link href="https://fonts.cdnfonts.com/css/br-hendrix" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'BR Hendrix', sans-serif;
+            font-weight: 700;
+            background-color: #DC2F31;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5em; /* Kleiner gemaakt om ruimte te besparen */
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background-color: #333;
+            padding: 10px; /* Verminderd om ruimte te besparen */
+            border-radius: 10px;
+            color: white;
+            max-width: 400px; /* Max breedte ingesteld */
+            max-height: 200px; /* Max hoogte ingesteld */
+            width: 100%;
+        }
+
+        .time-box {
+            margin: 0 10px; /* Marges verkleind */
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5em; /* Kleiner font om binnen de container te passen */
+        }
+
+        .label {
+            font-size: 0.9em; /* Iets kleiner voor meer compactheid */
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">VRBorrel</h1>
+
+    <div id="countdown">
+        <div class="time-box">
+            <span id="days"></span>
+            <span class="label">Dagen</span>
+        </div>
+        <div class="time-box">
+            <span id="hours"></span>
+            <span class="label">Uren</span>
+        </div>
+        <div class="time-box">
+            <span id="minutes"></span>
+            <span class="label">Minuten</span>
+        </div>
+        <div class="time-box">
+            <span id="seconds"></span>
+            <span class="label">Seconden</span>
+        </div>
+    </div>
+
+    <script>
+        // Cyclus van evenementen
+        const eventCycle = [
+            { days: 7, title: "VRBootcamp" },
+            { days: 7, title: "VRBootcamp" },
+            { days: 7, title: "VRBootcamp" },
+            { days: 6, title: "VRBootcamp" },
+            { days: 1, title: "VRBorrel" },
+        ];
+        let currentEventIndex = 0;
+
+        // Startdatum instellen
+        let countdownDate = new Date("Nov 14, 2024 16:30:00").getTime();
+
+        // Update functie voor de countdown
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance > 0) {
+                // Bereken resterende tijd
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update de UI
+                document.getElementById("days").innerHTML = days;
+                document.getElementById("hours").innerHTML = hours;
+                document.getElementById("minutes").innerHTML = minutes;
+                document.getElementById("seconds").innerHTML = seconds;
+            } else {
+                // Event verlopen - volgende evenement starten
+                currentEventIndex = (currentEventIndex + 1) % eventCycle.length;
+                const nextEvent = eventCycle[currentEventIndex];
+
+                // Voeg de dagen toe aan de huidige datum
+                countdownDate = new Date().getTime() + nextEvent.days * 24 * 60 * 60 * 1000;
+
+                // Update de titel
+                document.getElementById("title").innerHTML = `Aftellen tot ${nextEvent.title}`;
+            }
+        }
+
+        // Start de countdown en update elke seconde
+        setInterval(updateCountdown, 1000);
+
+        // Initiele set
+        updateCountdown();
+    </script>
+</body>
+</html>
