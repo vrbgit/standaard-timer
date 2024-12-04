@@ -76,18 +76,18 @@
     </div>
 
 <script>
-    // Cyclus van evenementen
+    // Cyclus van evenementen met specifieke titels en dagen
     const eventCycle = [
-        { days: 7, title: "VRBootcamp" },
-        { days: 7, title: "VRBootcamp" },
-        { days: 7, title: "VRBootcamp" },
-        { days: 6, title: "VRBootcamp" },
-        { days: 1, title: "VRBorrel" },
+        { days: 7, title: "VRBootcamp" }, // 14 nov -> 21 nov
+        { days: 7, title: "VRBootcamp" }, // 21 nov -> 28 nov
+        { days: 7, title: "VRBootcamp" }, // 28 nov -> 5 dec
+        { days: 6, title: "VRBootcamp" }, // 5 dec -> 11 dec
+        { days: 1, title: "VRBorrel" },   // 11 dec -> 12 dec
     ];
-    let currentEventIndex = 0;
 
-    // Startdatum instellen (voorbeeld: 14 november 2024, 16:30 lokale tijd)
+    // Huidige startdatum (14 november 2024, 16:30 lokale tijd)
     let countdownDate = new Date("2024-11-14T16:30:00").getTime();
+    let currentEventIndex = 0;
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -106,14 +106,14 @@
             document.getElementById("minutes").innerHTML = minutes;
             document.getElementById("seconds").innerHTML = seconds;
         } else {
-            // Tijd is verlopen - start volgende evenement
+            // Tijd is verlopen - ga naar het volgende evenement in de cyclus
             currentEventIndex = (currentEventIndex + 1) % eventCycle.length;
             const nextEvent = eventCycle[currentEventIndex];
 
-            // Voeg dagen toe aan de huidige datum
+            // Voeg het aantal dagen van het huidige evenement toe aan de countdownDate
             countdownDate = new Date(countdownDate).getTime() + nextEvent.days * 24 * 60 * 60 * 1000;
 
-            // Update de titel
+            // Update de titel met het huidige evenement
             document.getElementById("title").innerHTML = `Aftellen tot ${nextEvent.title}`;
         }
     }
@@ -121,7 +121,7 @@
     // Start de countdown en update elke seconde
     setInterval(updateCountdown, 1000);
 
-    // Initiele set
+    // Initiele set om UI direct te vullen
     updateCountdown();
 </script>
 </body>
