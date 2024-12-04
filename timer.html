@@ -1,3 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aftellen tot evenement</title>
+    <link href="https://fonts.cdnfonts.com/css/br-hendrix" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'BR Hendrix', sans-serif;
+            font-weight: 700;
+            background-color: #DC2F31;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .time-box {
+            margin: 0 10px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5em;
+        }
+
+        .label {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Aftellen tot evenement</h1>
+
+    <div id="countdown">
+        <div class="time-box">
+            <span id="days"></span>
+            <span class="label">Dagen</span>
+        </div>
+        <div class="time-box">
+            <span id="hours"></span>
+            <span class="label">Uren</span>
+        </div>
+        <div class="time-box">
+            <span id="minutes"></span>
+            <span class="label">Minuten</span>
+        </div>
+        <div class="time-box">
+            <span id="seconds"></span>
+            <span class="label">Seconden</span>
+        </div>
+    </div>
+
 <script>
     // Cyclus van evenementen
     const eventCycle = [
@@ -47,3 +124,5 @@
     // Initiele set
     updateCountdown();
 </script>
+</body>
+</html>
