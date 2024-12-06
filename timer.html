@@ -76,14 +76,14 @@
     </div>
 
 <script>
-    // Cyclus van evenementen met specifieke titels en seconden
+    // Cyclus van evenementen met specifieke titels en dagen
     const eventCycle = [
-        { seconds: 0, title: "VRBorrel" }, // 7 seconden naar volgende VRBootcamp
-        { seconds: 27, title: "VRBootcamp 1" }, // 7 seconden naar volgende VRBootcamp
-        { seconds: 27, title: "VRBootcamp 2" }, // 7 seconden naar volgende VRBootcamp
-        { seconds: 27, title: "VRBootcamp 3" }, // 7 seconden naar volgende VRBootcamp
-        { seconds: 16, title: "VRBootcamp 4" }, // 6 seconden naar volgende VRBootcamp
-        { seconds: 10, title: "VRBorrel" }    // 1 seconde naar volgende VRBorrel
+        { days: 0, title: "VRBorrel" },
+        { days: 7, title: "VRBootcamp 1" },
+        { days: 7, title: "VRBootcamp 2" },
+        { days: 7, title: "VRBootcamp 3" },
+        { days: 6, title: "VRBootcamp 4" },
+        { days: 1, title: "VRBorrel" }
     ];
 
     // Startdatum en -tijd (bijvoorbeeld: 2024-12-06T20:00:00)
@@ -112,8 +112,8 @@
             currentEventIndex = (currentEventIndex + 1) % eventCycle.length;
             const nextEvent = eventCycle[currentEventIndex];
 
-            // Voeg de seconden van het volgende evenement toe aan de countdownDate
-            countdownDate = new Date().getTime() + nextEvent.seconds * 1000;
+            // Voeg de dagen van het volgende evenement toe aan de countdownDate
+            countdownDate = new Date(countdownDate).getTime() + nextEvent.days * 24 * 60 * 60 * 1000;
 
             // Update de titel met het huidige evenement
             document.getElementById("title").innerHTML = `Aftellen tot ${nextEvent.title}`;
